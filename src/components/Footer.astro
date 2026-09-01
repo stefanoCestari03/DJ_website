@@ -1,0 +1,51 @@
+---
+import { site, socials } from "../data/site";
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <a href="#top" class="footer__mark display">{site.name}</a>
+
+    <nav class="footer__social">
+      {
+        socials.map((s) => (
+          <a href={s.href} class="link" target="_blank" rel="noopener">
+            {s.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <p class="footer__legal eyebrow">
+      © {year} {site.name}. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--color-line);
+    padding-block: clamp(3rem, 8vw, 6rem);
+  }
+  .footer__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+  .footer__mark {
+    font-size: clamp(2.5rem, 12vw, 8rem);
+  }
+  .footer__social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .footer__legal {
+    margin: 0;
+  }
+</style>

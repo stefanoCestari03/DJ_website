@@ -1,0 +1,151 @@
+---
+import { shows } from "../data/tour";
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const upcoming = shows
+  .filter((s) => new Date(s.date) >= today)
+  .sort((a, b) => a.date.localeCompare(b.date));
+
+const fmt = (iso: string) => {
+  const d = new Date(iso + "T00:00:00");
+  return {
+    day: d.toLocaleDateString("en-GB", { day: "2-digit" }),
+    mon: d.toLocaleDateString("en-GB", { month: "short" }).toUpperCase(),
+    year: d.getFullYear(),
+  };
+};
+---
+
+<section id="tour" class="section">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">01 — Tour</p>
+      <h2 class="display head__title">Live<br />Dates</h2>
+    </div>
+
+    {
+      upcoming.length === 0 ? (
+        <p class="empty reveal">No dates announced. Check back soon.</p>
+      ) : (
+        <ul class="list">
+          {upcoming.map((s) => {
+            const d = fmt(s.date);
+            const Row = s.ticketsUrl ? "a" : "div";
+            return (
+              <li class="reveal">
+                <Row
+                  class:list={["row", { "row--link": s.ticketsUrl }]}
+                  {...(s.ticketsUrl
+                    ? { href: s.ticketsUrl, target: "_blank", rel: "noopener" }
+                    : {})}
+                >
+                  <span class="row__date">
+                    <b>{d.day}</b> {d.mon} <i>{d.year}</i>
+                  </span>
+                  <span class="row__city">{s.city}, {s.country}</span>
+                  <span class="row__venue">{s.venue}</span>
+                  <span class="row__cta">
+                    {s.ticketsUrl ? "Tickets ↗" : "TBA"}
+                  </span>
+                </Row>
+              </li>
+            );
+          })}
+        </ul>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: clamp(2rem, 6vw, 4rem);
+  }
+  .head__title {
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
+  }
+
+  .empty {
+    font-family: var(--font-mono);
+    color: var(--color-muted);
+  }
+
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--color-line);
+  }
+  .list li {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: minmax(9rem, 0.8fr) 1.1fr 1.4fr auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding: clamp(1.1rem, 3vw, 1.9rem) 0;
+    transition: padding 0.4s cubic-bezier(0.19, 1, 0.22, 1), color 0.3s;
+  }
+  .row--link:hover {
+    padding-inline: 1.25rem;
+    color: var(--color-fg);
+    background: #111110;
+  }
+
+  .row__date {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    color: var(--color-muted);
+  }
+  .row__date b {
+    color: var(--color-fg);
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+  .row__date i {
+    font-style: normal;
+  }
+
+  .row__city {
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  .row__venue {
+    color: var(--color-muted);
+  }
+  .row__cta {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 780px) {
+    .row {
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        "date cta"
+        "city city"
+        "venue venue";
+      gap: 0.4rem 1rem;
+    }
+    .row__date { grid-area: date; }
+    .row__cta { grid-area: cta; }
+    .row__city { grid-area: city; font-size: 1.1rem; }
+    .row__venue { grid-area: venue; font-size: 0.9rem; }
+    .row--link:hover { padding-inline: 0; background: none; }
+  }
+</style>

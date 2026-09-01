@@ -1,0 +1,119 @@
+---
+import { site } from "../data/site";
+
+// Split into words so a word never breaks mid-way; keep a running
+// letter index across all words for the staggered intro animation.
+const words = site.name.split(" ");
+let n = 0;
+const wordLetters = words.map((w) =>
+  w.split("").map((ch) => ({ ch, i: n++ })),
+);
+---
+
+<section id="top" class="hero">
+  <div class="hero__inner wrap">
+    <p class="eyebrow hero__eyebrow">{site.tagline} — {site.location}</p>
+
+    <h1 class="display hero__title" aria-label={site.name}>
+      {
+        wordLetters.map((letters) => (
+          <span class="hero__word" aria-hidden="true">
+            {letters.map(({ ch, i }) => (
+              <span style={`--i:${i}`}>{ch}</span>
+            ))}
+          </span>
+        ))
+      }
+    </h1>
+
+    <a href="#tour" class="hero__scroll eyebrow">
+      <span>Scroll</span>
+      <svg width="10" height="30" viewBox="0 0 10 30" fill="none" aria-hidden="true">
+        <path d="M5 0v29M1 25l4 4 4-4" stroke="currentColor" stroke-width="1" />
+      </svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-block: 7rem 2.5rem;
+    overflow: hidden;
+  }
+
+  /* Soft vignette so the flat black has depth */
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(120% 80% at 12% 0%, #1a1a18 0%, transparent 55%),
+      radial-gradient(90% 70% at 100% 100%, #141412 0%, transparent 50%);
+    z-index: -1;
+  }
+
+  .hero__eyebrow {
+    margin-bottom: 1.25rem;
+    opacity: 0;
+    animation: fade-up 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.1s forwards;
+  }
+
+  .hero__title {
+    margin: 0;
+    font-size: clamp(2.75rem, 12vw, 10.5rem);
+    line-height: 0.86;
+  }
+  .hero__word {
+    display: block;      /* each word on its own line */
+    white-space: nowrap; /* never split a word across lines */
+  }
+  .hero__word span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.35em);
+    filter: blur(8px);
+    animation: letter-in 0.7s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    animation-delay: calc(0.2s + var(--i) * 45ms);
+  }
+
+  .hero__scroll {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: clamp(2rem, 5vw, 3.25rem);
+    opacity: 0;
+    animation: fade-up 0.8s ease 1s forwards;
+  }
+  .hero__scroll svg {
+    animation: bob 2s ease-in-out infinite;
+  }
+
+  @keyframes letter-in {
+    to { opacity: 1; transform: none; filter: blur(0); }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(1rem); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__word span,
+    .hero__eyebrow,
+    .hero__scroll {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      animation: none;
+    }
+  }
+</style>
