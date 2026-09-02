@@ -3,7 +3,7 @@
 export const site = {
   name: "Laud Culture",
   tagline: "DJ",
-  location: "Milan, IT",
+  location: "Trentino, IT",
   url: "https://laudculture.com",
   description:
     "Laud Culture — DJ. Bookings, tour dates and latest sounds.",
@@ -20,19 +20,10 @@ export const socials: SocialLink[] = [
   { label: "YouTube", href: "https://youtube.com/@laudculture" },
 ];
 
-export type BookingContact = {
-  region: string;
-  name: string;
-  email: string;
+export const booking = {
+  label: "Bookings & info",
+  email: "laudculture@gmail.com",
 };
-
-export const bookings: BookingContact[] = [
-  { region: "Management", name: "—", email: "management@laudculture.com" },
-  { region: "Worldwide Booking", name: "—", email: "booking@laudculture.com" },
-  { region: "Italy", name: "—", email: "italy@laudculture.com" },
-  { region: "Europe", name: "—", email: "europe@laudculture.com" },
-  { region: "North America", name: "—", email: "northamerica@laudculture.com" },
-];
 
 // Cards shown in the "Listen" section.
 // - `src`  -> renders an embedded player (Spotify playlist/album/track/artist,

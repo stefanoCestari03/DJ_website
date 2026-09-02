@@ -1,5 +1,5 @@
 ---
-import { bookings } from "../data/site";
+import { booking } from "../data/site";
 ---
 
 <section id="bookings" class="section">
@@ -9,19 +9,12 @@ import { bookings } from "../data/site";
       <h2 class="display head__title">Get In<br />Touch</h2>
     </div>
 
-    <dl class="grid">
-      {
-        bookings.map((b) => (
-          <div class="cell reveal">
-            <dt class="cell__region eyebrow">{b.region}</dt>
-            {b.name && b.name !== "—" && <dd class="cell__name">{b.name}</dd>}
-            <dd class="cell__email">
-              <a href={`mailto:${b.email}`} class="link">{b.email}</a>
-            </dd>
-          </div>
-        ))
-      }
-    </dl>
+    <div class="contact reveal">
+      <p class="contact__label eyebrow">{booking.label}</p>
+      <a href={`mailto:${booking.email}`} class="contact__email link">
+        {booking.email}
+      </a>
+    </div>
   </div>
 </section>
 
@@ -38,28 +31,18 @@ import { bookings } from "../data/site";
     font-size: clamp(2.5rem, 8vw, 5.5rem);
   }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 2.5rem 1.5rem;
-    margin: 0;
-  }
-
-  .cell {
+  .contact {
     border-top: 1px solid var(--color-line);
-    padding-top: 1rem;
+    padding-top: 1.5rem;
   }
-  .cell__region {
-    margin-bottom: 0.75rem;
+  .contact__label {
+    margin-bottom: 1rem;
   }
-  .cell__name {
-    margin: 0 0 0.2rem;
-    font-weight: 500;
-  }
-  .cell__email {
-    margin: 0;
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
+  .contact__email {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-size: clamp(1.6rem, 6vw, 3rem);
+    text-transform: lowercase;
     word-break: break-all;
   }
 </style>

@@ -32,22 +32,25 @@ const fmt = (iso: string) => {
         <ul class="list">
           {upcoming.map((s) => {
             const d = fmt(s.date);
-            const Row = s.ticketsUrl ? "a" : "div";
+            const Row = s.url ? "a" : "div";
             return (
               <li class="reveal">
                 <Row
-                  class:list={["row", { "row--link": s.ticketsUrl }]}
-                  {...(s.ticketsUrl
-                    ? { href: s.ticketsUrl, target: "_blank", rel: "noopener" }
+                  class:list={["row", { "row--link": s.url }]}
+                  {...(s.url
+                    ? { href: s.url, target: "_blank", rel: "noopener" }
                     : {})}
                 >
                   <span class="row__date">
                     <b>{d.day}</b> {d.mon} <i>{d.year}</i>
+                    {s.time && <em class="row__time">{s.time}</em>}
                   </span>
-                  <span class="row__city">{s.city}, {s.country}</span>
+                  <span class="row__city">
+                    {s.city}{s.country ? `, ${s.country}` : ""}
+                  </span>
                   <span class="row__venue">{s.venue}</span>
                   <span class="row__cta">
-                    {s.ticketsUrl ? "Tickets ↗" : "TBA"}
+                    {s.url ? s.urlLabel ?? "Tickets ↗" : "TBA"}
                   </span>
                 </Row>
               </li>
@@ -114,6 +117,12 @@ const fmt = (iso: string) => {
   }
   .row__date i {
     font-style: normal;
+  }
+  .row__time {
+    font-style: normal;
+    margin-left: 0.5rem;
+    padding-left: 0.5rem;
+    border-left: 1px solid var(--color-line);
   }
 
   .row__city {
