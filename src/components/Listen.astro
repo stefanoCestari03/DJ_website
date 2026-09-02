@@ -14,15 +14,22 @@ import { embeds } from "../data/site";
         embeds.map((e) => (
           <figure class="card reveal">
             <figcaption class="card__cap eyebrow">{e.title}</figcaption>
-            <div class="card__frame">
-              <iframe
-                src={e.src}
-                loading="lazy"
-                title={e.title}
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                allowfullscreen
-              />
-            </div>
+            {e.src ? (
+              <div class="card__frame">
+                <iframe
+                  src={e.src}
+                  loading="lazy"
+                  title={e.title}
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  allowfullscreen
+                />
+              </div>
+            ) : (
+              <a class="card__link" href={e.href} target="_blank" rel="noopener">
+                <span>{e.note ?? "Open"}</span>
+                <span class="card__link-cta">Open on {e.title} ↗</span>
+              </a>
+            )}
           </figure>
         ))
       }
@@ -45,7 +52,8 @@ import { embeds } from "../data/site";
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 440px));
+    justify-content: start;
     gap: 1.5rem;
   }
 
@@ -64,5 +72,31 @@ import { embeds } from "../data/site";
     width: 100%;
     height: 352px;
     border: 0;
+  }
+
+  .card__link {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+    min-height: 352px;
+    padding: 1.6rem;
+    border: 1px solid var(--color-line);
+    background: #111110;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .card__link:hover {
+    background: #17171533;
+    border-color: #3a3a36;
+  }
+  .card__link span:first-child {
+    max-width: 22ch;
+    color: var(--color-muted);
+  }
+  .card__link-cta {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
 </style>

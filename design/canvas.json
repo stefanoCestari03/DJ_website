@@ -1,0 +1,11 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1080, "h": 1080, "title": "LC monogram — dark" },
+    { "file": "Wordmark.dc.html", "x": 1200, "y": 0, "w": 1080, "h": 1080, "title": "Stacked wordmark" },
+    { "file": "Inverted.dc.html", "x": 2400, "y": 0, "w": 1080, "h": 1080, "title": "LC monogram — light" }
+  ],
+  "annotations": [
+    { "id": "note-ig", "x": 0, "y": -150, "w": 620, "text": "Instagram profile pic = 1080×1080, shown as a circle. The LC monogram sits inside the hairline circle = safe area. Export each artboard as PNG from the toolbar." }
+  ],
+  "launch": { "view": "canvas" }
+}

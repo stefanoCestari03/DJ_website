@@ -6,7 +6,7 @@ export const site = {
   location: "Milan, IT",
   url: "https://laudculture.com",
   description:
-    "Laud Culture — DJ and producer. Bookings, tour dates and latest releases.",
+    "Laud Culture — DJ. Bookings, tour dates and latest sounds.",
 };
 
 export type SocialLink = { label: string; href: string };
@@ -14,7 +14,7 @@ export type SocialLink = { label: string; href: string };
 export const socials: SocialLink[] = [
   { label: "Instagram", href: "https://instagram.com/laudculture" },
   { label: "SoundCloud", href: "https://soundcloud.com/laudculture" },
-  { label: "Spotify", href: "https://open.spotify.com/artist/laudculture" },
+  { label: "Spotify", href: "https://open.spotify.com/user/31eq4uqfszgnhkmxpwsv6c23fyfa" },
   { label: "Bandcamp", href: "https://laudculture.bandcamp.com" },
   { label: "TikTok", href: "https://tiktok.com/@laudculture" },
   { label: "YouTube", href: "https://youtube.com/@laudculture" },
@@ -34,17 +34,22 @@ export const bookings: BookingContact[] = [
   { region: "North America", name: "—", email: "northamerica@laudculture.com" },
 ];
 
-// Streaming embeds shown in the "Listen" section.
-// Swap these src values for your real playlist / track / album embeds.
-export type Embed = { title: string; src: string };
+// Cards shown in the "Listen" section.
+// - `src`  -> renders an embedded player (Spotify playlist/album/track/artist,
+//             or a SoundCloud track/set player URL)
+// - `href` -> renders a click-through card (used when there is nothing
+//             embeddable yet, e.g. a Spotify *user* profile)
+export type Embed = { title: string; src?: string; href?: string; note?: string };
 
 export const embeds: Embed[] = [
   {
-    title: "Latest on Spotify",
-    src: "https://open.spotify.com/embed/artist/1vCWHaC5f2uS3yhpwWbIA6?utm_source=generator&theme=0",
+    title: "Spotify",
+    href: "https://open.spotify.com/user/31eq4uqfszgnhkmxpwsv6c23fyfa",
+    note: "Playlists & selections — original tracks coming soon",
   },
-  {
-    title: "Recent set — SoundCloud",
-    src: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/platform/sets/best-of-2023&color=%23ffffff&inverse=true&auto_play=false&show_user=true",
-  },
+  // TODO: add the SoundCloud set/profile link, e.g.
+  // {
+  //   title: "SoundCloud",
+  //   src: "https://w.soundcloud.com/player/?url=<ENCODED_URL>&color=%23ffffff&inverse=true&auto_play=false&show_user=true",
+  // },
 ];

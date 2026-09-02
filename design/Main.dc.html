@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #f3f2ee; } a:hover { color: #b8b8b2; }
+    .frame {
+      position: relative;
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
+      background: #0a0a0a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+    }
+    .vignette {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(115% 90% at 50% 0%, #1d1d1a 0%, transparent 60%),
+        radial-gradient(100% 80% at 50% 100%, #141412 0%, transparent 55%);
+    }
+    .grain {
+      position: absolute;
+      inset: 0;
+      opacity: 0.06;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .safe {
+      position: absolute;
+      width: 1000px;
+      height: 1000px;
+      border: 1px solid rgba(243, 242, 238, 0.1);
+      border-radius: 50%;
+    }
+  </style>
+</helmet>
+<div class="frame">
+  <div class="vignette"></div>
+  <div class="grain"></div>
+  <div class="safe"></div>
+
+  <div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 40px;">
+    <div style="font-weight: 700; font-size: 560px; line-height: 0.78; letter-spacing: -0.06em; text-transform: uppercase; color: #f3f2ee; padding-left: 0.06em;">LC</div>
+    <div style="font-family: 'Space Mono', ui-monospace, Menlo, monospace; font-size: 30px; font-weight: 400; letter-spacing: 0.44em; text-transform: uppercase; color: #8a8a85; padding-left: 0.44em;">Laud Culture</div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>
