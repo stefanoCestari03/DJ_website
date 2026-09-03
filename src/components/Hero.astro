@@ -11,10 +11,10 @@ const wordLetters = words.map((w) =>
 ---
 
 <section id="top" class="hero">
-  <div class="hero__inner wrap">
+  <div class="hero__inner wrap" translate="no">
     <p class="eyebrow hero__eyebrow">{site.tagline} — {site.location}</p>
 
-    <h1 class="display hero__title" aria-label={site.name}>
+    <h1 class="display hero__title notranslate" aria-label={site.name} translate="no">
       {
         wordLetters.map((letters) => (
           <span class="hero__word" aria-hidden="true">

@@ -24,6 +24,7 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0a0a0a" />
+    <meta name="google" content="notranslate" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
@@ -38,7 +39,7 @@ const {
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body translate="no">
     <div class="grain" aria-hidden="true"></div>
     <slot />
 
