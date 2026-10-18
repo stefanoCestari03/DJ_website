@@ -6,7 +6,15 @@ export const site = {
   location: "Trentino, IT",
   url: "https://laudculture.com",
   description:
-    "Laud Culture — DJ. Bookings, tour dates and latest sounds.",
+    "Laud Culture — DJ from Trentino. Tech house, afro house, house. Bookings, tour dates and latest sounds.",
+};
+
+// Shown in the "About" section and in the marquee.
+export const genres = ["Tech House", "Afro House", "House"];
+
+export const about = {
+  bio: "DJ from Trentino, moving between the groove of house, the percussive pulse of afro house and the drive of tech house — from lakeside sunsets to late-night floors.",
+  photoAlt: "Laud Culture mixing on Pioneer DJ decks by a lake in Trentino",
 };
 
 export type SocialLink = { label: string; href: string };

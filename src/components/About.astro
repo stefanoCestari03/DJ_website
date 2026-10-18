@@ -1,0 +1,91 @@
+---
+import { Image } from "astro:assets";
+import { about, genres } from "../data/site";
+import photo from "../assets/laud-culture-dj.jpg";
+---
+
+<section id="about" class="section">
+  <div class="wrap about">
+    <figure class="about__photo reveal">
+      <Image
+        src={photo}
+        alt={about.photoAlt}
+        widths={[480, 800, 1200]}
+        sizes="(min-width: 900px) 40vw, 100vw"
+        loading="lazy"
+      />
+    </figure>
+
+    <div class="about__text">
+      <p class="eyebrow reveal">01 — About</p>
+      <h2 class="display about__title reveal">Sound<br />&amp; Groove</h2>
+      <p class="about__bio reveal">{about.bio}</p>
+
+      <ul class="genres reveal" aria-label="Genres">
+        {genres.map((g) => <li class="genres__item">{g}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    display: grid;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: end;
+  }
+  @media (min-width: 900px) {
+    .about {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    }
+  }
+
+  .about__photo {
+    margin: 0;
+    border: 1px solid var(--color-line);
+    overflow: hidden;
+  }
+  .about__photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 50% 30%;
+    filter: grayscale(0.35) contrast(1.05);
+    transition: filter 0.6s ease;
+  }
+  .about__photo:hover img {
+    filter: none;
+  }
+
+  .about__title {
+    margin: 1.25rem 0 2rem;
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
+  }
+
+  .about__bio {
+    max-width: 38ch;
+    margin: 0 0 2.5rem;
+    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    line-height: 1.5;
+    color: var(--color-muted);
+  }
+
+  .genres {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .genres__item {
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--color-line);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+</style>

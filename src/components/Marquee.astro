@@ -1,6 +1,6 @@
 ---
-import { site } from "../data/site";
-const phrase = `${site.name} · ${site.tagline} ·`;
+import { site, genres } from "../data/site";
+const phrase = `${site.name} · ${genres.join(" · ")} ·`;
 const items = Array.from({ length: 8 }, () => phrase);
 ---
 
